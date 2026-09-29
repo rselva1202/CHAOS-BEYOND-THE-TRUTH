@@ -1,0 +1,79 @@
+/* Font @import must come before any rules, so it leads the cascade. */
+@import './fonts.css';
+@import 'tailwindcss';
+@import './theme.css';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-ink antialiased;
+  }
+
+  /* Anchored sections must not hide their headings under the floating nav. */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+}
+
+@layer components {
+  /* Pill CTA shared by the navbar and the hero. */
+  .btn-pill {
+    @apply inline-flex cursor-pointer items-center justify-center rounded-full bg-ink font-sans text-paper transition-transform duration-300 ease-out select-none hover:scale-[1.03];
+  }
+
+  /*
+   * Scroll-triggered reveals. An element starts translated/faded per its
+   * direction class and settles to identity when .is-visible lands
+   * (toggled by the IntersectionObserver in components/Reveal.tsx).
+   */
+  .reveal {
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-left {
+    transform: translateX(-56px);
+    opacity: 0;
+  }
+
+  .reveal-right {
+    transform: translateX(56px);
+    opacity: 0;
+  }
+
+  .reveal-up {
+    transform: translateY(28px);
+    opacity: 0;
+  }
+
+  .reveal.is-visible {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  /* Vignette frame shared by the portfolio cards. Translucent on purpose:
+     the fixed video shows straight through the artwork. */
+  .card-frame {
+    @apply overflow-hidden rounded-3xl border border-white/50 bg-white/25 shadow-[0_18px_60px_-24px_rgba(0,0,0,0.25)];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-up {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}
