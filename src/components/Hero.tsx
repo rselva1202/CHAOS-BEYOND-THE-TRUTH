@@ -12,12 +12,20 @@ export default function Hero() {
         KEMET
       </h1>
 
-      <a
-        href="#/home"
-        className="animate-fade-rise-delay-2 btn-pill mt-12 px-14 py-5 text-base"
-      >
-        Begin Journey
-      </a>
+      <div className="animate-fade-rise-delay-2 mt-12 flex flex-col items-center gap-4 sm:flex-row">
+        <a href="#/acts" className="btn-pill px-14 py-5 text-base">
+          ENTER THE STORY
+        </a>
+        <a
+          href="#/home#studio"
+          className="rounded-full border border-amber-700/30 bg-white/40 px-10 py-5 text-base text-ink backdrop-blur-sm transition-colors hover:bg-amber-100/60"
+        >
+          Begin Journey
+        </a>
+      </div>
+      <p className="animate-fade-rise-delay-2 mt-5 text-xs uppercase tracking-[0.3em] text-muted">
+        One cosmic story — told in four acts
+      </p>
 
       <a
         href="#studio"

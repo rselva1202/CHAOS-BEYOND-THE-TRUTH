@@ -9,6 +9,8 @@ export default function EraPage({ id }: { id: string }) {
     return <NotFound label="This era is lost to the sands." />;
   }
 
+  const isZepTepi = era.id === 'zep-tepi';
+
   return (
     <DetailShell
       eyebrow={`Era — Historical Database`}
@@ -28,6 +30,22 @@ export default function EraPage({ id }: { id: string }) {
       {era.sections.map((section) => (
         <StoryBlock key={section.heading} heading={section.heading} paragraphs={section.paragraphs} />
       ))}
+
+      {isZepTepi && (
+        <section className="card-frame bg-gradient-to-br from-sky-100/40 via-white/30 to-indigo-100/40 p-8">
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-800/80">The Narrative Cycle</p>
+          <h2 className="mt-3 font-display text-3xl text-ink">Experience the Full Story</h2>
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-black/80">
+            Zep Tepi is the First Time this whole website is built upon. Act I of the Four Acts —
+            <span className="italic"> The Dawn of Creation</span> — tells it as full immersive
+            narrative: the waters of Nun, the mound, the first family of gods, and the struggle of
+            Ma’at and Isfet that everything after depends on.
+          </p>
+          <a href="#/acts/dawn-of-creation" className="btn-pill mt-6 inline-block px-8 py-3 text-sm">
+            Read Act I — The Dawn of Creation →
+          </a>
+        </section>
+      )}
     </DetailShell>
   );
 }

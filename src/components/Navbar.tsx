@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#/home' },
-  { label: 'Pantheon of Gods', href: '#/home', anchor: 'studio' },
-  { label: 'Dynastic Timeline', href: '#/home', anchor: 'timeline' },
-  { label: 'Map of Kemet', href: '#/home', anchor: 'about' },
-  { label: 'Mythological Scrolls', href: '#/home', anchor: 'journal' },
-  { label: 'Chronicles', href: '#/home', anchor: 'reach-us' },
-];
+  { label: 'The Four Acts', href: '#/acts' },
+  { label: 'Pantheon of Gods', href: '#/home#studio', anchor: 'studio' },
+  { label: 'Dynastic Timeline', href: '#/home#timeline', anchor: 'timeline' },
+  { label: 'Map of Kemet', href: '#/home#about', anchor: 'about' },
+  { label: 'Mythological Scrolls', href: '#/home#journal', anchor: 'journal' },
+  { href: '#/home#reach-us', label: 'Chronicles', anchor: 'reach-us' },
+] as const;
 
 /** Fixed top navigation: serif wordmark, myth links, black pill CTA. Gains a
  *  glassmorphic backdrop once the page is scrolled. Section links navigate
@@ -21,19 +22,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const goToSection = (anchor?: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!anchor) return;
-    const current = window.location.hash.replace(/^#\/?/, '');
-    if (current === '' || current === 'home') {
-      // Already home: let the anchor jump normally via preventDefault + scroll.
-      e.preventDefault();
-      document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' });
-      history.replaceState(null, '', `#${anchor}`);
-    }
-    // Else: fall through to #/home, and the router's anchor handling lands us.
-    sessionStorage.setItem('kemet-anchor', anchor);
-  };
 
   return (
     <header
@@ -56,11 +44,7 @@ export default function Navbar() {
         <ul className="hidden items-center gap-7 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
-              <a
-                href={link.anchor ? `${link.href}` : link.href}
-                onClick={goToSection(link.anchor)}
-                className="text-sm text-muted transition-colors duration-200 hover:text-ink"
-              >
+              <a href={link.href} className="text-sm text-muted transition-colors duration-200 hover:text-ink">
                 {link.label}
               </a>
             </li>

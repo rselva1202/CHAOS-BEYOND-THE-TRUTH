@@ -10,7 +10,7 @@ import { useEffect, type RefObject } from 'react';
  * https://drive.google.com/file/d/1FE48vWZZeSGzHeA9gglBrMWAjOb2nvzu/view?t=4.668
  * Re-download anytime with: node scripts/fetch-video.mjs
  */
-export const VIDEO_URL = '/aethera-loop.mp4';
+export const VIDEO_URL = 'aethera-loop.mp4';
 
 /** Remote fallback in case the local file is missing (e.g. fresh clone). */
 export const VIDEO_FALLBACK_URL =
